@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+
+products/home
+{% for product in products.all %}
+
+    <p>{{ product.title }}</p>
+    <div>{{ product.body }}</div>
+
+{% endfor %}
+
+{% endblock %}
