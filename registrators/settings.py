@@ -55,7 +55,7 @@ ROOT_URLCONF = 'registrators.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['registrators/templates'],
+        'DIRS': ['registrators/templates', 'media/', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

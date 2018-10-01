@@ -17,8 +17,9 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="{% url 'home' %}">
-                <img src="" height="30" width="30" alt="" class="d-inline-block alighn-top"/>
-                Product Hunt
+                <img src="{% static 'logo.png' %}" width="60" alt="" class="img-fluid"
+                     class="d-inline-block alighn-top"/>
+                НПО Энергодиагностика
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                     aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,8 +28,8 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ml-auto">
 
-                        <a class="nav-item nav-link" href=""><span class="oi oi-plus"></span></a>
-                        <a class="nav-item nav-link" href="">Logout</a>
+                    <a class="nav-item nav-link" href=""><span class="oi oi-plus"></span></a>
+                    <a class="nav-item nav-link" href="">Logout</a>
 
                 </div>
             </div>
@@ -37,25 +38,31 @@
 
 </header>
 <main role="main">
-    <section class="jumbotron text-center">
+    <section class="jumbotron text-center" style="background: url({% static 'head3.jpg' %})">
         <div class="container">
-          <h1 class="jumbotron-heading">Album example</h1>
-          <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
-          <p>
-            <a href="#" class="btn btn-primary my-2">Main call to action</a>
-            <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-          </p>
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="lead" style="color:#fefefe">Техническая диагностика, проведение энергетических
+                        обследований,
+                        экспертиза
+                        промышленной безопасности и ремонт технических устройств
+                    </p>
+                </div>
+                <div class="col-md-6"><img src="{% static 'head1.png' %}" alt=""></div>
+            </div>
         </div>
-      </section>
-<div class="container">
-    {% block content %}
+    </section>
+    <div class="container">
+        {% block content %}
 
-    {% endblock %}
-</div>
+        {% endblock %}
+    </div>
+
 </main>
 <footer>
     <div class="container">
         <p class="text-center">&copy; {% now "Y" %}</p>
+
     </div>
 </footer>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

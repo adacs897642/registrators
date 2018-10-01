@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<div class="row">
+    <div class="col-md-10 blog-main shadow-sm">
+        <h3 class="pb-3 mb-4 font-italic border-bottom">
+            {{ product.title }}
+        </h3>
+        <img src="{{ product.image.url }}" class="img-fluid" alt="">
+        <div class="blog-post">
+            <h2 class="blog-post-title">Описание</h2>
+
+            <p>{% include product.body %}</p>
+            <hr>
+            <h2>Прошивка</h2>
+            <p>CRC={{product.flash_crc}}</p>
+            <p>Версия={{product.flash_version}}</p>
+            <div>
+                <h5>Lock/Fuse bits</h5>
+                <img src="{{ product.flash_fuse.url }}" alt="" class="img-fluid">
+            </div>
+            <div class="p-3">
+                <h4 class="font-italic">Файлы</h4>
+                <ol class="list-unstyled mb-0">
+
+                    <li><a href="{{ product.flash_code.url }}">Файл прошивки</a></li>
+
+                </ol>
+            </div>
+        </div><!-- /.blog-post -->
+
+    </div><!-- /.blog-main -->
+    <aside class="col-md-2 blog-sidebar">
+        <div class="p-3">
+            <h4 class="font-italic">Документы</h4>
+            <ol class="list-unstyled mb-0">
+                <li><a href="{{ product.doc.url }}">Руководство</a></li>
+                <li><a href="{{ product.flash_code.url }}">Файл прошивки</a></li>
+            </ol>
+        </div>
+    </aside><!-- /.blog-sidebar -->
+</div>
+
+{% endblock %}
+
