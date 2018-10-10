@@ -22,14 +22,6 @@
                 <h5>Lock/Fuse bits</h5>
                 <img src="{{ product.flash_fuse.url }}" alt="" class="img-fluid">
             </div>
-            <div class="p-3">
-                <h4 class="font-italic">Файлы</h4>
-                <ol class="list-unstyled mb-0">
-
-                    <li><a href="{{ product.flash_code.url }}">Файл прошивки</a></li>
-
-                </ol>
-            </div>
         </div><!-- /.blog-post -->
 
     </div><!-- /.blog-main -->
@@ -37,8 +29,9 @@
         <div class="p-3">
             <h4 class="font-italic">Документы</h4>
             <ol class="list-unstyled mb-0">
-                <li><a href="{{ product.doc.url }}">Руководство</a></li>
-                <li><a href="{{ product.flash_code.url }}">Файл прошивки</a></li>
+                {% for item in product_docs %}
+                <li><a href="{{ item.doc.url }}">{{item.title}}</a></li>
+                {% endfor %}
             </ol>
         </div>
     </aside><!-- /.blog-sidebar -->
