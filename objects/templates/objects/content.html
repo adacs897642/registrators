@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block nav %}
+<a class="nav-item nav-link" href="{% url 'home' %}">Устройства</a>
+<a class="nav-item nav-link active" href="{% url 'objects' %}">Объекты</a>
+<a class="nav-item nav-link" href="">Logout</a>
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-10 blog-main shadow-sm">
+        <h4 class="pb-3 mb-4 font-italic border-bottom">
+            {{ objects.name }}
+        </h4>
+        <p>Телефон перехода: {{objects.phone}}</p>
+        <hr>
+        {% if error %}
+        <div class="blog-post">
+            <h5 class="pb-3 mb-4 font-italic border-bottom">
+                Текущие неисправности
+            </h5>
+            {% for err in error %}
+            <div class="row">
+                <div class="col-md-1 p-2"><small class="text-muted">{{err.pub_date_pretty}}</small></div>
+                <div class="col-md-1 p-2">{{ err.name }}</div>
+                <div class="col-md-10 p-2">{{ err.error}}</div>
+            </div>
+            <hr>
+            {% endfor %}
+
+
+        </div><!-- /.blog-post -->
+        {%endif%}
+
+    </div><!-- /.blog-main -->
+    <aside class="col-md-2 blog-sidebar">
+        <div class="p-3">
+            <h4 class="font-italic">Документы</h4>
+            <ol class="list-unstyled mb-0">
+            {% for doc in documents%}
+               <li> <a href="{{ doc.file.url }}">{{ doc.name }}</a></li>
+                {%endfor%}
+            </ol>
+        </div>
+    </aside><!-- /.blog-sidebar -->
+</div>
+{% endblock %}

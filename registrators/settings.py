@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'products.apps.ProductsConfig',
+    'objects.apps.ObjectsConfig',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +81,7 @@ DATABASES = {
         'NAME': 'registratorsdb',
         'USER' : 'postgres',
         'PASSWORD':'gpadmin',
-        'HOST':'192.168.1.202',
+        'HOST':'192.168.1.210',
         'PORT':'5432',
     }
 }
@@ -122,7 +123,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'registrators/static')
+
+    os.path.join(BASE_DIR, 'registrators/static/'),
+    os.path.join(BASE_DIR, 'objects/static/'),
 ]
 
 STATIC_URL = '/static/'

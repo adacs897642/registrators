@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block nav %}
+<a class="nav-item nav-link" href="{% url 'home' %}">Устройства</a>
+<a class="nav-item nav-link active" href="{% url 'objects' %}">Объекты</a>
+<a class="nav-item nav-link" href="">Logout</a>
+{% endblock %}
+{% block content %}
+
+
+<div class="row">
+    <div class="col-md-12 blog-main shadow-sm">
+        <h3 class="pb-3 mb-4 font-italic border-bottom">
+            {{ lpu.name }}
+        </h3>
+
+        {% if lpu.img %}
+        <h4 class="pb-3 mb-4 font-italic border-bottom">
+            Таблица диспетчера
+        </h4>
+        <img src="{{ lpu.img.url }}" class="img-fluid" alt="">
+        {% endif %}
+        {% if objects %}
+        <hr>
+        <h4 class="pb-3 mb-4 font-italic border-bottom">
+            Объекты оснащения
+        </h4>
+        <div class="blog-post">
+            <div class=list-group">
+                {% for obj in objects %}
+
+                <a class="list-group-item list-group-item-action flex-column align-items-start"
+                   style="text-decoration:none" href="{% url 'content' lpu_id obj.id %}">
+                    <div class="row">
+                        <div class="col-md-1 p-2">
+                            {{obj.project}}
+                        </div>
+                        <div class="col-md-1 p-2">
+                            {% for err in error %}
+                            {% if err.obj_id == obj.id %}
+                            <span class="oi oi-warning" data-toggle="tooltip" data-placement="top"
+                                  title="Есть неисправности"></span>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-10 p-2">
+                            {{obj.name}}
+                            <div class="text-right"><small class="text-muted">{{obj.phone}}</small></div>
+
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+
+
+        </div><!-- /.blog-post -->
+        {%endif%}
+
+    </div><!-- /.blog-main -->
+</div>
+
+
+{% endblock %}

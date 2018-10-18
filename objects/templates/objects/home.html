@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block nav %}
+<a class="nav-item nav-link" href="{% url 'home' %}">Устройства</a>
+<a class="nav-item nav-link active" href="{% url 'objects' %}">Объекты</a>
+<a class="nav-item nav-link" href="">Logout</a>
+{% endblock %}
+{% block content %}
+
+
+<div class="row">
+    <div class="col-md-12 blog-main shadow-sm">
+        <h3 class="pb-3 mb-4 font-italic border-bottom">
+            Эксплуатирующие организации
+        </h3>
+        <div class="blog-post">
+            <div class=list-group">
+                {% for lpu in objects_lpu %}
+                <a class="list-group-item list-group-item-action flex-column align-items-start"
+                   style="text-decoration:none" href="{% url 'lpu' lpu.id %}">
+                    <div>
+                        {{lpu.name}}
+                        <small class="text-muted">{{lpu.phone}}</small>
+                    </div>
+                </a>
+                {% endfor%}
+            </div>
+        </div><!-- /.blog-post -->
+
+    </div><!-- /.blog-main -->
+</div>
+
+
+{% endblock %}
