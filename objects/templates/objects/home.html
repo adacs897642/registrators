@@ -27,6 +27,30 @@
         </div><!-- /.blog-post -->
 
     </div><!-- /.blog-main -->
+
+</div>
+<hr>
+<div class="row">
+     <div>
+            <p>
+                <a class="badge badge-light" data-toggle="collapse" href="#collapse" role="button"
+                   aria-expanded="false" aria-controls="collapse">
+                    Добавить организацию
+                </a>
+            </p>
+            <div class="collapse" id="collapse">
+                <div class="card card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-primary" name="btn_add">Добавить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
 </div>
 
 

@@ -2,19 +2,45 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from .models import Lpu, Object, Error, Documents
 
-from .forms import ErrorsForm, DocumentForm
+from .forms import ErrorsForm, DocumentForm, LpuForm, ObjectForm
 
 
 def home(request):
     objects_lpu = Lpu.objects.all()
-    return render(request, 'objects/home.html', {'objects_lpu': objects_lpu})
+    form = LpuForm()
+
+    if request.method == 'POST':
+        if 'btn_add' in request.POST:
+            form = LpuForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(request.path)
+
+    return render(request, 'objects/home.html', {'objects_lpu': objects_lpu, 'form':form})
 
 
 def detail(request, lpu_id):
     lpu = get_object_or_404(Lpu, pk=lpu_id)
     objects = Object.objects.filter(lpu_id=lpu_id).order_by('project')
     error = Error.objects.order_by('obj_id').distinct('obj_id')
-    return render(request,'objects/lpu.html',{'objects':objects, 'lpu_id':lpu_id,'error':error, 'lpu':lpu})
+
+    form  = ObjectForm(initial={
+        'lpu' : lpu_id,
+    })
+
+    if request.method == 'POST':
+        if 'btn_add' in request.POST:
+            form = ObjectForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(request.path)
+
+    return render(request,'objects/lpu.html',{'objects':objects,
+                                              'lpu_id':lpu_id,
+                                              'error':error,
+                                              'lpu':lpu,
+                                              'form':form
+                                              })
 
 
 def content(request, lpu_id, objects_id):

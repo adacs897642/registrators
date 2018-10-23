@@ -47,14 +47,14 @@ class Error(models.Model):
     time = models.DateTimeField(auto_now=True, verbose_name='Время записи')
 
     def __str__(self):
-        return self.name[0:100]
+        return (self.name[0:100] + ': ' + self.error[0:100])[0:100]
 
     def pub_date_pretty(self):
         return self.time.strftime('%b %e %Y')
 
     class Meta:
         verbose_name = 'Проблема'
-        verbose_name_plural = 'Пробемы'
+        verbose_name_plural = 'Проблемы'
         ordering=['name']
 
 

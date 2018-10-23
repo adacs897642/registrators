@@ -1,5 +1,5 @@
 from django import forms
-from .models import Error, Object, Documents
+from .models import Error, Object, Documents, Lpu
 from tzlocal import get_localzone
 
 
@@ -19,3 +19,19 @@ class DocumentForm(forms.ModelForm):
     class Meta:
         model = Documents
         fields = ('obj','name','file')
+
+
+class LpuForm(forms.ModelForm):
+
+    class Meta:
+        model = Lpu
+        fields =('name','phone','img')
+
+
+class ObjectForm(forms.ModelForm):
+
+    lpu = forms.ModelChoiceField(queryset=Lpu.objects.all(), widget=forms.HiddenInput)
+
+    class Meta:
+        model = Object
+        fields = ('lpu', 'name', 'phone', 'project')
