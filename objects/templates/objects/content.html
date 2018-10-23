@@ -10,7 +10,37 @@
         <h4 class="pb-3 mb-4 font-italic border-bottom">
             {{ objects.name }}
         </h4>
-        <p>Телефон перехода: {{objects.phone}}</p>
+        <div class="row">
+            <ul style="display: inline; margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;">
+                <li style="display: inline;margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;padding-inline-end: 40px;">
+                    Телефон перехода: {{objects.phone}}
+                </li>
+                <li style="display: inline;margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;border-left: solid 1px #dbdbdb;padding-inline-end: 40px;">
+                    {{objects.project}}
+                </li>
+                <li style="display: inline;margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;border-left: solid 1px #dbdbdb;padding-inline-end: 40px;">
+                    {{lpu.name}}
+                </li>
+            </ul>
+        </div>
+
+
         <hr>
         {% if error %}
         <div class="blog-post">
@@ -18,10 +48,20 @@
                 Текущие неисправности
             </h5>
             {% for err in error %}
-            <div class="row">
-                <div class="col-md-1 p-2"><small class="text-muted">{{err.pub_date_pretty}}</small></div>
-                <div class="col-md-1 p-2">{{ err.name }}</div>
-                <div class="col-md-10 p-2">{{ err.error}}</div>
+            <div class="row" style="margin-left: 0; margin-right: 0">
+                <div class="col col-md-1 p-2">
+                    <small class="text-muted">{{err.pub_date_pretty}}</small>
+                </div>
+                <div class="col col-md-11 p-2">
+                    <div class="row">
+                        <div class="col col-md-12 text-center">{{ err.name }}
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-md-12">{{ err.error }}</div>
+                    </div>
+                </div>
             </div>
             <hr>
             {% endfor %}
@@ -29,17 +69,59 @@
 
         </div><!-- /.blog-post -->
         {%endif%}
+        <div>
+            <p>
+                <a class="badge badge-light" data-toggle="collapse" href="#collapse1" role="button"
+                   aria-expanded="false" aria-controls="collapse1">
+                    Добавить неисправность
+                </a>
+            </p>
+            <div class="collapse" id="collapse1">
+                <div class="card card-body">
+                    <form method="post">
+                        <div class="form-group">
+                            {% csrf_token %}
+                            {{ form_error.as_p }}
 
+                            <button type="submit" class="btn btn-primary" name="btn_add_error">Добавить</button>
+                            </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div>
+            <p>
+                <a class="badge badge-light" data-toggle="collapse" href="#collapse2" role="button"
+                   aria-expanded="false" aria-controls="collapse2">
+                    Добавить документ
+                </a>
+            </p>
+            <div class="collapse" id="collapse2">
+                <div class="card card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            {% csrf_token %}
+                            {{ form_document.as_p }}
+                            <button type="submit" class="btn btn-primary" name="btn_upload_file">Добавить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div><!-- /.blog-main -->
     <aside class="col-md-2 blog-sidebar">
         <div class="p-3">
             <h4 class="font-italic">Документы</h4>
             <ol class="list-unstyled mb-0">
-            {% for doc in documents%}
-               <li> <a href="{{ doc.file.url }}">{{ doc.name }}</a></li>
+                {% for doc in documents%}
+                <li><a href="{{ doc.file.url }}">{{ doc.name }}</a></li>
                 {%endfor%}
             </ol>
+
         </div>
+
     </aside><!-- /.blog-sidebar -->
 </div>
 {% endblock %}

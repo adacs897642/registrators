@@ -44,7 +44,7 @@ class Error(models.Model):
     obj = models.ForeignKey(Object, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, verbose_name='Название')
     error = models.TextField(verbose_name='Описание проблемы')
-    time = models.DateTimeField(verbose_name='Время записи')
+    time = models.DateTimeField(auto_now=True, verbose_name='Время записи')
 
     def __str__(self):
         return self.name[0:100]

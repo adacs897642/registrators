@@ -25,7 +25,7 @@ SECRET_KEY = '3y$_rfb+*7-k%-gb808qb1fmb_e%x23m97zi&3&jzkblc6j^9w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -119,6 +119,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+FILE_UPLOAD_HANDLERS = ("django.core.files.uploadhandler.MemoryFileUploadHandler",
+ "django.core.files.uploadhandler.TemporaryFileUploadHandler")
+
+FILE_UPLOAD_MAX_MEMORY_SIZE = 2621440
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
