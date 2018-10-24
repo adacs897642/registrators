@@ -24,7 +24,7 @@ class Object(models.Model):
     #name
     name  = models.TextField(verbose_name='Название объекта')
     #phone
-    phone = models.CharField(max_length=255, verbose_name='Телефон объекта')
+    phone = models.CharField(max_length=255, verbose_name='Телефон объекта', default='',null=True, blank=True)
     #project
     project = models.CharField(max_length=255, verbose_name='Номер проекта')
 
