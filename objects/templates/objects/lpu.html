@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block nav %}
 <a class="nav-item nav-link" href="{% url 'home' %}">Устройства</a>
 <a class="nav-item nav-link active" href="{% url 'objects' %}">Объекты</a>
@@ -37,8 +38,10 @@
                         <div class="col-md-1 p-2">
                             {% for err in error %}
                             {% if err.obj_id == obj.id %}
-                            <span class="oi oi-warning" data-toggle="tooltip" data-placement="top"
-                                  title="Есть неисправности"></span>
+                            <img src="{% static 'warning-3x.png' %}" alt="" data-toggle="tooltip" data-placement="top"
+                                  title="Есть неисправности">
+                            <!--<span class="oi oi-warning" data-toggle="tooltip" data-placement="top"
+                                  title="Есть неисправности"></span>-->
                             {% endif %}
                             {% endfor %}
                         </div>
